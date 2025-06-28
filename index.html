@@ -5,6 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> AKARI </title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Modal básico */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body> 
     <header class ="header" >
@@ -48,7 +78,7 @@
             <div class="product-txt">
                 <h3>Camara lorem</h3>
                 <div class="price">
-                    <a href="#" class="btn-2">Acceder</a>
+                    <a href="#" class="btn-2" onclick="openModal('Cámara')">Acceder</a>
                 </div>
             </div>
         </div>
@@ -57,7 +87,7 @@
             <div class="product-txt">
                 <h3>Alarma lorem</h3>
                 <div class="price">
-                    <a href="#" class="btn-2">Acceder</a>
+                    <a href="#" class="btn-2" onclick="openModal('Alarma')">Acceder</a>
                 </div>
             </div>
         </div>
@@ -66,7 +96,7 @@
             <div class="product-txt">
                 <h3>Buzon lorem</h3>
                 <div class="price">
-                    <a href="#" class="btn-2">Acceder</a>
+                    <a href="#" class="btn-2" onclick="openModal('Buzón')">Acceder</a>
                 </div>
             </div>
         </div>
@@ -78,5 +108,38 @@
             <input type="submit" class="btn-3" value="Iniciar">
         </form>
     </section>
+
+    <!-- Modal para acceder -->
+    <div id="accessModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Acceso al sistema</h2>
+            <p>Estás accediendo a: <span id="systemName"></span></p>
+            <form>
+                <input type="password" placeholder="Contraseña" required>
+                <input type="submit" class="btn-3" value="Ingresar">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(system) {
+            document.getElementById('systemName').textContent = system;
+            document.getElementById('modalTitle').textContent = 'Acceso a ' + system;
+            document.getElementById('accessModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('accessModal').style.display = 'none';
+        }
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('accessModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
